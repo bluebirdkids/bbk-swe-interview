@@ -1,0 +1,4 @@
+Django>=4.2,<5.0
+django-cors-headers==4.7.0              # Enable in-browser requests to your Django application from other origins, especially for local dev.
+djangorestframework>=3.14
+psycopg2-binary

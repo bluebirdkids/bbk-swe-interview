@@ -1,0 +1,32 @@
+[
+  {
+    "model": "patients.patient",
+    "pk": 1,
+    "fields": {
+      "first_name": "Alice",
+      "last_name": "Smith",
+      "date_of_birth": "2002-01-01",
+      "mrn": "A001"
+    }
+  },
+  {
+    "model": "patients.patient",
+    "pk": 2,
+    "fields": {
+      "first_name": "Bob",
+      "last_name": "Jones",
+      "date_of_birth": "2012-05-12",
+      "mrn": "A002"
+    }
+  },
+  {
+    "model": "patients.patient",
+    "pk": 3,
+    "fields": {
+      "first_name": "Charlie",
+      "last_name": "Garcia",
+      "date_of_birth": "2015-09-30",
+      "mrn": "A003"
+    }
+  }
+]
