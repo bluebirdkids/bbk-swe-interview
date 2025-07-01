@@ -6,7 +6,6 @@ type Patient = {
   last_name: string;
   date_of_birth: string;
   mrn: string;
-  primary_care_provider: string;
 };
 
 function App() {

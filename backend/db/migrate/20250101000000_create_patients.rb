@@ -5,7 +5,6 @@ class CreatePatients < ActiveRecord::Migration[7.1]
       t.string :last_name
       t.date :date_of_birth
       t.string :mrn
-      t.string :primary_care_provider
 
       t.timestamps
     end
