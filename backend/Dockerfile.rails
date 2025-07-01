@@ -1,0 +1,33 @@
+FROM ruby:3.2.0
+
+WORKDIR /app
+
+# Install dependencies
+RUN apt-get update -qq && \
+    apt-get install -y postgresql-client
+
+# Install gems
+COPY Gemfile* .
+RUN bundle install
+
+# Copy the main application
+COPY . .
+
+# Configure binding for Docker
+RUN sed -i 's/bind "tcp:\/\/127.0.0.1:3000"/bind "tcp:\/\/0.0.0.0:3000"/' config/puma.rb
+
+# Configure database for Docker
+RUN sed -i 's/adapter: sqlite3/adapter: postgresql/' config/database.yml && \
+    sed -i 's/host: localhost/host: db/' config/database.yml && \
+    sed -i 's/password:/password: password/' config/database.yml
+
+# Add CORS configuration
+RUN mkdir -p config/initializers && \
+    echo 'Rails.application.config.middleware.insert_before 0, Rack::Cors do\n  allow do\n    origins "*"\n    resource "*", headers: :any, methods: [:get, :post, :put, :patch, :delete, :options, :head]\n  end\nend' > config/initializers/cors.rb
+
+# Add skipping CSRF for API
+RUN sed -i 's/class ApplicationController < ActionController::Base/class ApplicationController < ActionController::Base\n  skip_before_action :verify_authenticity_token/' app/controllers/application_controller.rb
+
+EXPOSE 3000
+
+CMD ["rails", "server", "-b", "0.0.0.0"]
