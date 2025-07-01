@@ -1,4 +1,3 @@
-class ApplicationController < ActionController::Base
-  # Skip CSRF protection for API requests
-  skip_before_action :verify_authenticity_token
+class ApplicationController < ActionController::API
+  # API-only controller, no need for CSRF protection
 end
